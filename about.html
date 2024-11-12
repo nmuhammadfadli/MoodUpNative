@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>MoodUp</title>
+  <style type="text/tailwindcss">
+    @layer utilities {
+        body{
+            background-color: #FFFFFF;
+        }
+    }
+    /* *{
+        border: 1px solid red;
+    } */
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleOpen = document.getElementById('toggleOpen');
+        const toggleClose = document.getElementById('toggleClose');
+        const collapseMenu = document.getElementById('collapseMenu');
+
+        // Function to open the menu
+        toggleOpen.addEventListener('click', () => {
+            collapseMenu.classList.remove('hidden');
+        });
+
+        // Function to close the menu
+        toggleClose.addEventListener('click', () => {
+            collapseMenu.classList.add('hidden');
+        });
+    });
+  </script>
+</head>
+<body>
+    <header class='z-40 header flex shadow-md py-4 px-4 sm:px-10 bg-yellow-300 font-[sans-serif] min-h-[70px] tracking-wide fixed top-0 w-full' style="border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;">
+        <div class='flex flex-wrap items-center justify-between gap-5 w-full'>
+          <a href="javascript:void(0)"><img src="assets/moodup-logo.png" alt="logo" class='w-36' />
+          </a>
+      
+          <div id="collapseMenu"
+            class='hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50'>
+            <button id="toggleClose" class='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3'>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-black" viewBox="0 0 320.591 320.591">
+                <path
+                  d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                  data-original="#000000"></path>
+                <path
+                  d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                  data-original="#000000"></path>
+              </svg>
+            </button>
+      
+            <ul
+              class='lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
+              <li class='mb-6 hidden max-lg:block'>
+                <a href="javascript:void(0)"><img src="assets/moodup-logo-color.png" alt="logo" class='w-36' />
+                </a>
+              </li>
+              <li class='max-lg:border-b border-gray-300 max-lg:py-3 px-3'>
+                <a href='./'
+                  class='hover:text-black text-gray-600 block font-semibold text-[15px]'>Beranda</a>
+              </li>
+              <li class='max-lg:border-b border-gray-600 max-lg:py-3 px-3'><a href='about.html'
+                  class='hover:text-black text-gray-600 block font-semibold text-[15px]'>Tentang Kami</a>
+              </li>
+              <li class='max-lg:border-b border-gray-600 max-lg:py-3 px-3'><a href='pre-quiz.html'
+                  class='hover:text-black text-gray-600 block font-semibold text-[15px]'>Quiz</a>
+              </li>
+            </ul>
+            </div>
+            <div class='flex max-lg:ml-auto space-x-3'>
+                <button class='px-4 py-2 text-sm rounded-full font-bold text-black border-2 border-white bg-white transition-all ease-in-out duration-300 hover:bg-transparent hover:text-white'><a href="http://wa.me/6287840199095" target="_blank" rel="noopener noreferrer">Hubungi Kami</a></button>
+                <button id="toggleOpen" class='lg:hidden'>
+                    <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    <section id="hero" class="bg-white flex mx-auto" style="background-image: url('assets/bg-1'); background-size: cover; background-repeat: no-repeat;">
+        <div class="grid md:grid-cols-2 md:px-10 md:gap-8 max-w-6xl mt-24 mx-auto items-center">
+            <div class="flex justify-center lg:h-[120px] lg:h-[300px] relative z-20 rounded-3xl bg-white py-14 md:py-0 mx-4 md:mx-0 shadow-xl md:px-24 mt-14">
+                <img src="assets/moodup-logo-color.png" class="rounded-md lg:w-full md:w-full object-contain z-50 w-3/5" alt="Dining Experience" />
+            </div>
+            <div class="max-md:order-1 max-md:text-center mt-4 justify-center flex flex-col items-center">
+                <h2 class="text-center text-gray-800 md:text-5xl text-3xl font-extrabold mb-4 md:!leading-[55px] text-slate-800">
+                    Apa itu <span class="text-[#12769B]"> Mood</span><span class="text-yellow-200">Up</span><span class="text-[#12769B]">?</span>
+                </h2>
+                <p class="mb-2 text-sm mx-8 text-slate-600">Moodup adalah platform kesehatan mental yang dirancang untuk membantu kamu memahami, melacak, dan mengelola kesehatan mentalmu.</p>
+                <p class="mb-4 text-sm mx-8 text-slate-600">Melalui penilaian stres, tips kesehatan mental, serta rekomendasi dari ahli, kami berkomitmen untuk menjadi teman digitalmu dalam menjaga keseimbangan emosional dan psikologis.</p>
+            </div>
+        </div>
+        
+    </section>
+
+    <section id="content" class="bg-white pt-24" style="background-image: url('assets/bg-2.png');  background-repeat: no-repeat;">
+        <div class="font-sans px-4 py-12 ">
+            <div class="col-span-2 grid grid-cols-1 gap-4 lg:mx-32">
+                <div class="text-left">
+                    <h2 class="text-center text-gray-800 md:text-5xl text-3xl font-extrabold mb-4 md:!leading-[55px] text-slate-800">Misi <span class="text-[#12769B]"> Mood</span><span class="text-yellow-200">Up</span><span class="text-[#12769B]">?</span></h2>
+                    <p class="mb-2 text-sm mx-8 text-slate-600 text-center">Kami percaya bahwa kesehatan mental adalah bagian penting dari kesejahteraan setiap individu. Misi kami adalah menyediakan akses mudah ke informasi, sumber daya, dan alat yang dapat membantu siapa saja menjaga kesehatan mental mereka.</p>
+                <p class="mb-4 text-sm mx-8 text-slate-600 text-center">Dengan Moodup, kami ingin menciptakan dunia di mana setiap orang bisa merasa didengar, dipahami, dan memiliki kendali atas kesehatan mental mereka.</p>
+                </div>
+            </div>     
+        </div>      
+    </section>
+    <section id="content2" class="bg-white pt-20" style="background-image: url('assets/bg-3.png');  background-repeat: no-repeat;">
+        <div class="font-sans px-4 py-12">
+            <div class="col-span-2 grid grid-cols-1 gap-4 lg:mx-32">
+                <div class="text-left">
+                    <h2 class="text-center text-gray-800 md:text-5xl text-3xl font-extrabold mb-4 md:!leading-[55px] text-slate-800">Kenapa Harus <span class="text-[#12769B]"> Mood</span><span class="text-yellow-200">Up</span><span class="text-[#12769B]">?</span></h2>
+                    <p class="mb-2 text-sm mx-8 text-slate-600 text-center">Kami percaya bahwa kesehatan mental adalah bagian penting dari kesejahteraan setiap individu. Misi kami adalah menyediakan akses mudah ke informasi, sumber daya, dan alat yang dapat membantu siapa saja menjaga kesehatan mental mereka.</p>
+                <p class="mb-4 text-sm mx-8 text-slate-600 text-center">Dengan Moodup, kami ingin menciptakan dunia di mana setiap orang bisa merasa didengar, dipahami, dan memiliki kendali atas kesehatan mental mereka.</p>
+                </div>
+            </div>     
+        </div>      
+    </section>
+    <section id="content3" class="bg-white pt-20" style="background-image: url('assets/bg-3.png');  background-repeat: no-repeat;">
+        <div class="font-sans px-4 py-12">
+            <div class="col-span-2 grid grid-cols-1 gap-4 lg:mx-32">
+                <div class="text-left">
+                    <h2 class="text-center text-gray-800 md:text-5xl text-3xl font-extrabold mb-4 md:!leading-[55px] text-slate-800">Bagaimana <span class="text-[#12769B]"> Mood</span><span class="text-yellow-200">Up</span><span class="text-[#12769B]"></span> Bekerja?</h2>
+                    <p class="mb-2 text-sm mx-8 text-slate-600 text-center">Moodup menggunakan pendekatan yang mudah digunakan. Kamu cukup membuat akun, mengisi beberapa penilaian cepat, dan kami akan menampilkan hasil stresmu serta rekomendasi yang relevan.</p>
+                <p class="mb-4 text-sm mx-8 text-slate-600 text-center">Jika dibutuhkan, kamu dapat langsung berkonsultasi dengan ahli atau mengikuti tips yang disediakan untuk menjaga kesehatan mentalmu sehari-hari.</p>
+                </div>
+            </div>
+             
+        </div>    
+        <img src="assets/bg-4.png" alt="">
+        <div class="bg-[#F99886] h-24 w-full"></div>  
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleOpen = document.getElementById('toggleOpen');
+            const toggleClose = document.getElementById('toggleClose');
+            const collapseMenu = document.getElementById('collapseMenu');
+    
+            toggleOpen.addEventListener('click', () => {
+                collapseMenu.classList.remove('hidden');
+            });
+    
+            toggleClose.addEventListener('click', () => {
+                collapseMenu.classList.add('hidden');
+            });
+        });
+      </script>
+
+</body>
+</html>
