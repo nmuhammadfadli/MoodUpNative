@@ -1,0 +1,29 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  when: on_success
+  only:
+    - master
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker login -u cicd-example -p $CI_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/foxcoding98/moodup .
+    - docker push registry.gitlab.com/foxcoding/moodup
+
+deploy:
+  stage: deploy
+  when: on_success
+  only:
+    - master
+  image: curlimages/curl:latest
+  services:
+    - docker:dind
+  script:
+    - curl --user deployer:$JENKINS_PWD http://34.135.146.218:8080/job/deploy/build
+
+
