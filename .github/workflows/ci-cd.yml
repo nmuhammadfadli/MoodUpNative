@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: MoodUpNative/playwright-tests # <== Sesuaikan dengan lokasi package.json
+        working-directory: playwright-tests # <== Sesuaikan dengan lokasi package.json
 
     steps:
       - name: Checkout code
