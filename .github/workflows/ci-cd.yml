@@ -28,7 +28,9 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Build and run site (local test server)
+        working-directory: ${{ github.workspace }}
         run: |
+
           docker build -t moodup-test .
           docker run -d --name moodup-test -p 8087:80 moodup-test
           sleep 5
