@@ -8,40 +8,43 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: playwright-tests  # pastikan ini sesuai lokasi package.json
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          path: .
+          fetch-depth: 0
+
+      - name: List repo root files (debug)
+        run: ls -la
+
+      - name: List playwright-tests folder (debug)
+        run: ls -la ./playwright-tests
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm ci
-        working-directory: playwright-tests
 
-      - name: Install Playwright and browsers
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps
-        working-directory: playwright-tests
-
-      - name: Build and run site
-        run: |
-          docker build -t moodup-test .
-          docker run -d --name moodup-test -p 8087:80 moodup-test
-          sleep 5
 
       - name: Run Playwright tests
         run: npx playwright test
-        working-directory: playwright-tests
-
-      - name: Stop and remove container
-        run: |
-          docker stop moodup-test
-          docker rm moodup-test
 
   build-and-push:
     runs-on: ubuntu-latest
@@ -50,14 +53,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-        with:
-          path: .
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/moodup:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/moodup:latest ./playwright-tests
 
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/moodup:latest
