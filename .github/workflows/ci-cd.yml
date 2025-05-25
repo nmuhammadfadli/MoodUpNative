@@ -8,9 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: playwright-tests # <== Sesuaikan dengan lokasi package.json
 
     steps:
       - name: Checkout code
@@ -23,20 +20,22 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: playwright-tests
 
       - name: Install Playwright and browsers
         run: npx playwright install --with-deps
+        working-directory: playwright-tests
 
       - name: Build and run site (local test server)
-        working-directory: ${{ github.workspace }}
         run: |
-
           docker build -t moodup-test .
           docker run -d --name moodup-test -p 8087:80 moodup-test
           sleep 5
+        working-directory: ${{ github.workspace }}
 
       - name: Run Playwright tests
         run: npx playwright test
+        working-directory: playwright-tests
 
       - name: Stop and remove container
         run: |
