@@ -18,24 +18,23 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install dependencies (in playwright-tests folder)
         run: npm ci
-        working-directory: playwright-tests
+        working-directory: ./playwright-tests
 
       - name: Install Playwright and browsers
         run: npx playwright install --with-deps
-        working-directory: playwright-tests
+        working-directory: ./playwright-tests
 
-      - name: Build and run site (local test server)
+      - name: Build and run site (local test server from root)
         run: |
           docker build -t moodup-test .
           docker run -d --name moodup-test -p 8087:80 moodup-test
           sleep 5
-        working-directory: ${{ github.workspace }}
 
       - name: Run Playwright tests
         run: npx playwright test
-        working-directory: playwright-tests
+        working-directory: ./playwright-tests
 
       - name: Stop and remove container
         run: |
