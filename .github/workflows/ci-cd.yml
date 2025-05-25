@@ -1,4 +1,4 @@
-name: CI/CD for Static Website
+name: CI/CD with Playwright Test
 
 on:
   push:
@@ -6,8 +6,44 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright and browsers
+        run: npx playwright install --with-deps
+
+      - name: Build and run site (local test server)
+        run: |
+          docker build -t moodup-test .
+          docker run -d --name moodup-test -p 8087:80 moodup-test
+          sleep 5 # tunggu container ready
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Stop container
+        run: docker stop moodup-test
+
+      - name: Upload test report (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: playwright-report
+
   build-and-push:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
